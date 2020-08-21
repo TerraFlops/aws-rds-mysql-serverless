@@ -1,13 +1,13 @@
+# Convert the database name into compliant names for cluster/subnet groups
 locals {
   database_id = replace(var.name, "_", "-")
   database_subnet_group_name = "${local.database_id}-database-subnet-group"
-  database_cluster_group_name = "${local.database_id}-database-cluster-group"
   database_cluster_parameter_group_name = "${local.database_id}-database-cluster-parameter-group"
 }
 
 # Create subnet group
 resource "aws_db_subnet_group" "subnet_group" {
-  name = var.name
+  name = local.database_subnet_group_name
   subnet_ids = var.subnet_ids
 
   tags = {
@@ -17,7 +17,7 @@ resource "aws_db_subnet_group" "subnet_group" {
 
 # Create parameter group
 resource "aws_rds_cluster_parameter_group" "cluster_parameter_group" {
-  name = var.name
+  name = local.database_cluster_parameter_group_name
   family = var.family
 
   dynamic "parameter" {
