@@ -25,8 +25,9 @@ variable "master_username" {
 }
 
 variable "master_password" {
-  description = "Database master password"
+  description = "Database master password, if none supplied a random 32 character password will be generated"
   type = string
+  default = null
 }
 
 variable "backup_retention_period" {

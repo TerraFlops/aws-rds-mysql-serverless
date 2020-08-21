@@ -52,7 +52,7 @@ resource "aws_rds_cluster" "database_cluster" {
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.cluster_parameter_group.name
   db_subnet_group_name = aws_db_subnet_group.subnet_group.name
   master_username = var.master_username
-  master_password = random_password.master_user_password.result
+  master_password = var.master_password == null ? random_password.master_user_password.result : var.master_password
   skip_final_snapshot = var.skip_final_snapshot
   storage_encrypted = var.storage_encrypted
   vpc_security_group_ids = var.security_group_ids
