@@ -47,7 +47,7 @@ resource "aws_rds_cluster" "database_cluster" {
   engine = var.engine
   engine_version = var.engine_version
   backup_retention_period = var.backup_retention_period
-  cluster_identifier = var.name
+  cluster_identifier = local.database_id
   database_name = var.name
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.cluster_parameter_group.name
   db_subnet_group_name = aws_db_subnet_group.subnet_group.name
