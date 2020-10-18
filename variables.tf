@@ -14,6 +14,12 @@ variable "snapshot_identifier" {
   default = null
 }
 
+variable "enable_http_endpoint" {
+  description = "Enable Data API HTTP endpoint"
+  type = bool
+  default = false
+}
+
 variable "subnet_ids" {
   description = "Set of AWS subnet IDs in which the database will be provisioned"
   type = set(string)
