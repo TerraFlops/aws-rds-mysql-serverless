@@ -1,7 +1,7 @@
 # Convert the database name into compliant names for cluster/subnet groups
 locals {
   database_id = replace(var.name, "_", "-")
-  database_id_snake = join("", [for element in split("-", lower(var.name)) : title(element)])
+  database_id_snake = join("", [for element in split("-", lower(replace(var.name, "_", "-"))) : title(element)])
   database_subnet_group_name = "${local.database_id}-database-subnet-group"
   database_cluster_parameter_group_name = "${local.database_id}-database-cluster-parameter-group"
 }
