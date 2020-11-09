@@ -76,7 +76,7 @@ resource "aws_sns_topic" "database_cluster_alert" {
 }
 
 resource "aws_db_event_subscription" "database_cluster_alert" {
-  name = "${database_id_snake}Alert"
+  name = "${local.database_id_snake}Alert"
   sns_topic = aws_sns_topic.database_cluster_alert.arn
   source_type = "db-cluster"
   source_ids = aws_rds_cluster.database_cluster.id
