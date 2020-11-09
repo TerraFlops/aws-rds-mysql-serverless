@@ -72,11 +72,11 @@ resource "aws_rds_cluster" "database_cluster" {
 }
 
 resource "aws_sns_topic" "database_cluster_alert" {
-  name = "${local.database_id_snake}Alert"
+  name = "${local.database_id_snake}MysqlDatabaseClusterAlert"
 }
 
 resource "aws_db_event_subscription" "database_cluster_alert" {
-  name = "${local.database_id_snake}Alert"
+  name = "${local.database_id_snake}MysqlDatabaseClusterAlert"
   sns_topic = aws_sns_topic.database_cluster_alert.arn
   source_type = "db-cluster"
   source_ids = [
