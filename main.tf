@@ -1,6 +1,7 @@
 # Convert the database name into compliant names for cluster/subnet groups
 locals {
   database_id = replace(var.name, "_", "-")
+  database_id_snake = join("", [for element in split("-", lower(var.name)) : title(element)])
   database_subnet_group_name = "${local.database_id}-database-subnet-group"
   database_cluster_parameter_group_name = "${local.database_id}-database-cluster-parameter-group"
 }
@@ -69,3 +70,20 @@ resource "aws_rds_cluster" "database_cluster" {
     Name = var.name
   }
 }
+
+resource "aws_sns_topic" "database_cluster_alert" {
+  name = "${database_id_snake}Alert"
+}
+
+resource "aws_db_event_subscription" "database_cluster_alert" {
+  name = "${database_id_snake}Alert"
+  sns_topic = aws_sns_topic.database_cluster_alert.arn
+  source_type = "db-cluster"
+  source_ids = aws_rds_cluster.database_cluster.id
+  event_categories = [
+    "failover",
+    "maintenance",
+    "notification"
+  ]
+}
+
