@@ -72,7 +72,7 @@ resource "aws_rds_cluster" "database_cluster" {
 }
 
 resource "aws_sns_topic" "database_cluster_alert" {
-  name = "${database_id_snake}Alert"
+  name = "${local.database_id_snake}Alert"
 }
 
 resource "aws_db_event_subscription" "database_cluster_alert" {
