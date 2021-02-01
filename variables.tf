@@ -67,7 +67,7 @@ variable "database_cluster_parameters" {
   description = "Database cluster parameters to set"
   type = list(object({
     name = string
-    value = number
+    value = any
     apply_method = string
   }))
   default = []
