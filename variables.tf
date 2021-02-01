@@ -1,3 +1,9 @@
+variable "deletion_protection" {
+  description = "Whether to enable deletion protection on the database"
+  type = bool
+  default = false
+}
+
 variable "name" {
   description = "Name of the database (must be MySQL compliant)"
   type = string

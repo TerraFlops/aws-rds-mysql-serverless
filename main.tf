@@ -58,6 +58,7 @@ resource "aws_rds_cluster" "database_cluster" {
   skip_final_snapshot = var.skip_final_snapshot
   storage_encrypted = var.storage_encrypted
   vpc_security_group_ids = var.security_group_ids
+  deletion_protection = var.deletion_protection
   # Configure scaling policy for serverless database
   scaling_configuration {
     auto_pause               = var.auto_pause
