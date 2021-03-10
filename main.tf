@@ -74,6 +74,7 @@ resource "aws_rds_cluster" "database_cluster" {
 
 resource "aws_sns_topic" "database_cluster_alert" {
   name = "${local.database_id_snake}MysqlDatabaseClusterAlert"
+  kms_master_key_id = var.sns_topic_kms_master_key_id
 }
 
 resource "aws_db_event_subscription" "database_cluster_alert" {
