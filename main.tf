@@ -91,3 +91,21 @@ resource "aws_db_event_subscription" "database_cluster_alert" {
   ]
 }
 
+resource "aws_route53_record" "cname_reader" {
+  count = var.cname_reader_hosted_zone_id != null && var.cname_reader != null ? 1 : 0
+  zone_id = var.cname_reader_hosted_zone_id
+  type = "CNAME"
+  name = var.cname_reader
+  ttl = 60
+  records = [ aws_rds_cluster.database_cluster.reader_endpoint ]
+}
+
+resource "aws_route53_record" "cname_writer" {
+  count = var.cname_writer_hosted_zone_id != null && var.cname_writer != null ? 1 : 0
+  zone_id = var.cname_writer_hosted_zone_id
+  type = "CNAME"
+  name = var.cname_writer
+  ttl = 60
+  records = [ aws_rds_cluster.database_cluster.endpoint ]
+}
+

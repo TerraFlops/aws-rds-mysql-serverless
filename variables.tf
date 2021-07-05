@@ -126,3 +126,27 @@ variable "sns_topic_kms_master_key_id" {
   description = "Optional KMS key ID to use for SNS topic encryption"
   default = null
 }
+
+variable "cname_reader_hosted_zone_id" {
+  type = string
+  description = "Optional CNAME hosted zoned ID"
+  default = null
+}
+
+variable "cname_reader" {
+  type = string
+  description = "Optional CNAME for reader endpoint"
+  default = null
+}
+
+variable "cname_writer_hosted_zone_id" {
+  type = string
+  description = "Optional CNAME hosted zoned ID"
+  default = null
+}
+
+variable "cname_writer" {
+  type = string
+  description = "Optional CNAME for writer endpoint"
+  default = null
+}
