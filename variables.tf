@@ -150,3 +150,29 @@ variable "cname_writer" {
   description = "Optional CNAME for writer endpoint"
   default = null
 }
+
+variable "ssm_parameter_name_database_name" {
+  type = string
+  default = null
+}
+
+variable "ssm_parameter_name_master_username" {
+  type = string
+  default = null
+}
+
+variable "ssm_parameter_name_master_password" {
+  type = string
+  default = null
+}
+
+variable "ssm_parameter_name_hostname" {
+  type = string
+  default = null
+}
+
+variable "ssm_parameter_name_port" {
+  type = string
+  default = null
+}
+

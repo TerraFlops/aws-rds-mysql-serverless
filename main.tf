@@ -109,3 +109,37 @@ resource "aws_route53_record" "cname_writer" {
   records = [ aws_rds_cluster.database_cluster.endpoint ]
 }
 
+resource "aws_ssm_parameter" "database_master_username" {
+  count = var.ssm_parameter_name_master_username != null ? 1 : 0
+  name = var.ssm_parameter_name_master_username
+  type = "SecureString"
+  value = aws_rds_cluster.database_cluster.master_username
+}
+
+resource "aws_ssm_parameter" "database_master_password" {
+  count = var.ssm_parameter_name_master_password != null ? 1 : 0
+  name = var.ssm_parameter_name_master_password
+  type = "SecureString"
+  value = aws_rds_cluster.database_cluster.master_password
+}
+
+resource "aws_ssm_parameter" "database_name" {
+  count = var.ssm_parameter_name_database_name != null ? 1 : 0
+  name = var.ssm_parameter_name_database_name
+  type = "SecureString"
+  value = aws_rds_cluster.database_cluster.database_name
+}
+
+resource "aws_ssm_parameter" "database_hostname" {
+  count = var.ssm_parameter_name_hostname != null ? 1 : 0
+  name = var.ssm_parameter_name_hostname
+  type = "SecureString"
+  value = aws_rds_cluster.database_cluster.endpoint
+}
+
+resource "aws_ssm_parameter" "database_port" {
+  count = var.ssm_parameter_name_port != null ? 1 : 0
+  name = var.ssm_parameter_name_port
+  type = "SecureString"
+  value = aws_rds_cluster.database_cluster.port
+}
